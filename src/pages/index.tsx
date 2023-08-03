@@ -27,7 +27,7 @@ const Home = () => {
 			</button>
 			{state.images.map((image) => (
 				<div key={image.id} className="p-4">
-					<CardImages image={image.url} />
+					<CardImages src={image.url} alt="fox" className="object-cover rounded-md bg-gray-300" />
 				</div>
 			))}
 		</div>

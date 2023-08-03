@@ -1,10 +1,13 @@
-import Image from 'next/image';
+import Image, { ImageProps } from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-interface Props {
-	image: string;
-}
 
-const CardImages = ({ image }: Props) => {
+type ImageTypes = Omit<ImageProps, 'src'>;
+interface PropsComponent {
+	src: string;
+}
+type Props = PropsComponent & ImageTypes;
+
+const CardImages = ({ src, ...otherProps }: Props) => {
 	const [img, setImg] = useState(
 		'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjMyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4='
 	);
@@ -13,7 +16,7 @@ const CardImages = ({ image }: Props) => {
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
-					setImg(image);
+					setImg(src);
 				}
 			});
 		});
@@ -24,19 +27,12 @@ const CardImages = ({ image }: Props) => {
 		return () => {
 			observer.disconnect();
 		};
-	}, [img]);
+	}, [src, img]);
 
 	return (
 		<div className="relative w-80 h-80">
 			<div className="absolute top-0 left-0 right-0 bottom-0">
-				<Image
-					ref={imageRef}
-					src={img}
-					fill
-					alt="Image"
-					className="object-cover rounded-md bg-gray-300"
-					loading="lazy"
-				/>
+				<Image ref={imageRef} src={img} fill loading="lazy" {...otherProps} />
 			</div>
 		</div>
 	);
