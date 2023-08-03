@@ -9,7 +9,7 @@ const Home = () => {
 	const [state, setStates] = useState<State>({ images: [] });
 	const addFox: MouseEventHandler<HTMLButtonElement> = (event) => {
 		event.preventDefault();
-		const random = (): number => Math.floor(Math.random() * 124);
+		const random = (): number => Math.floor(Math.random() * 124) + 1;
 		const image = `https://randomfox.ca/images/${random()}.jpg`;
 		const newStateImages = state.images;
 		newStateImages.push({
