@@ -1,9 +1,9 @@
+import { IImages } from 'app';
 import { CardImages } from 'components/Card/CardImages';
 import { useState } from 'react';
 import type { MouseEventHandler } from 'react';
-type Images = { id: string; url: string };
 interface State {
-	images: Images[];
+	images: IImages[];
 }
 const Home = () => {
 	const [state, setStates] = useState<State>({ images: [] });
